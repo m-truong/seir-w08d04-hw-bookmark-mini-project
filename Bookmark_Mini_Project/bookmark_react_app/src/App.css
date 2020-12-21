@@ -29,10 +29,11 @@ nav h1 {
 nav h1:hover {
   text-decoration: underline;
 }
-main {
+section {
   width: 100%;
   margin: 0 auto;
   height: 100%;
+  text-align: center;
 }
 
 /* Bookmark form */
@@ -58,8 +59,8 @@ h2 {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.bookmarks li {
-  list-style-type: none;
+.bookmarks span.bookmarkTitle {
+  /* list-style-type: none; */
   color: #C22116;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1)
 }
@@ -69,7 +70,7 @@ h2 {
   text-decoration: none;
 }
 
-.bookmarks li:hover {
+.bookmarks span.bookmarkTitle:hover {
   text-decoration: underline;
   font-size: 18pt;
 }
@@ -80,7 +81,7 @@ h2 {
 
 .flex-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 
 /* .inputs {
@@ -99,8 +100,8 @@ button {
   font-family: 'Roboto Slab', serif;
   display: inline-block;
   cursor: pointer;
-  padding: 0.5rem 2rem;
-  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
   text-transform: uppercase;
   background-color: #F46E64;
   border: 0;

@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
+import Bookmark from "./Components/Bookmark/Bookmark";
+import { BookmarkContext } from "./Context";
 import './App.css';
 
 function App() {
@@ -110,7 +112,7 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  };
+  }; 
 
   // Show Handler - ust open up in separate tab
 
@@ -119,11 +121,11 @@ function App() {
   }, []);
 
   return (
-    <>
+    <BookmarkContext.Provider value={bookmarks}>
       <nav>
         <h1>Bookmarks</h1>
       </nav>
-      <main>
+      <section>
         <h3>Add a bookmark!</h3>
         <form onSubmit={handleCreateSubmit}>
           <label htmlFor="newTitle">Title:</label>
@@ -140,13 +142,14 @@ function App() {
             placeholder="Add website url (http/https)" />
           <button type="submit">Add Bookmark!</button>
         </form>
-      </main>
-
+      </section>
+      <section>
       <div className="bookmarks">
         {bookmarks.map((currBookmark, index) => {
           return (
-            <>
-              <ul>
+            <> 
+            <Bookmark bookmark={currBookmark} handleDelete={handleDelete}/>
+              {/* <ul>
                 <a href={currBookmark.url} target="_blank"><li key={currBookmark._id}>{currBookmark.title}</li></a>
                 <button
                   onClick={(evt) => {
@@ -162,13 +165,13 @@ function App() {
                 >
                   {"↩️"}
                 </button>
-              </ul>
-
+              </ul> */}
             </>
           );
         })}
       </div>
-    </>
+      </section>
+      </BookmarkContext.Provider>
   );
 }
 
