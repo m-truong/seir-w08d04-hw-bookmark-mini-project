@@ -73,7 +73,6 @@ bookmarkRoutes.post('/', async (req, res) => {
         const createdBookmark = await bookmarkModel.create(req.body);
         //status sets the status code then sends a json response
         res.status(200).json(createdBookmark);
-        // try
         // implicitly has a 'throw' keyword with (new) Error-object
     } catch (error) {
         // sets the status code and returns the error as json
