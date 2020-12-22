@@ -49,36 +49,6 @@ function App() {
     }
   };
 
-  // Update title Handler
-  const handleUpdate = async (id) => {
-    // filter through array for the currBookmark using id 
-      // store into variable 
-        // pass the currBookmark (non-updated)
-    try {
-      const response = await fetch(`http://localhost:3000/bookmarks/${id}`, {
-        // OPTIONS-object
-        method: "PUT",
-        // must set the content-type headers
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify()
-        // ** ^^^ up here change the database first 
-      });
-      const deletedBookmark = await response.json();
-
-      // makes copy of bookmarks array state
-      // ** vvv then change current state 
-      let myBookmarks = [...bookmarks];
-      // filters the array and returns array with items that only pass this filter
-      myBookmarks = myBookmarks.filter((item) => item._id !== deletedBookmark._id);
-      // replaces the state 
-      setBookmarks(myBookmarks);
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   // Create Form Handler
   const handleNewTitle = (evt) => {
     setWebsiteTitle(evt.target.value);
@@ -112,7 +82,7 @@ function App() {
     } catch (error) {
       console.error(error);
     }
-  }; 
+  };
 
   // Show Handler - ust open up in separate tab
 
@@ -125,9 +95,9 @@ function App() {
       <nav>
         <h1>Bookmarks</h1>
       </nav>
-      <section>
+      <section className="">
         <h3>Add a bookmark!</h3>
-        <form onSubmit={handleCreateSubmit}>
+        <form className="create-bookmark-form" onSubmit={handleCreateSubmit}>
           <label htmlFor="newTitle">Title:</label>
           <input id="newTitle"
             type="text"
@@ -143,35 +113,19 @@ function App() {
           <button type="submit">Add Bookmark!</button>
         </form>
       </section>
+
       <section>
-      <div className="bookmarks">
-        {bookmarks.map((currBookmark, index) => {
-          return (
-            <> 
-            <Bookmark bookmark={currBookmark} handleDelete={handleDelete}/>
-              {/* <ul>
-                <a href={currBookmark.url} target="_blank"><li key={currBookmark._id}>{currBookmark.title}</li></a>
-                <button
-                  onClick={(evt) => {
-                    handleDelete(currBookmark._id);
-                  }}
-                >
-                  {"✖️"}
-                </button>
-                <button
-                  onClick={(evt) => {
-                    handleUpdate(currBookmark._id);
-                  }}
-                >
-                  {"↩️"}
-                </button>
-              </ul> */}
-            </>
-          );
-        })}
-      </div>
+        <div className="bookmarks">
+          {bookmarks.map((currBookmark, index) => {
+            return (
+              <>
+                <Bookmark key={currBookmark._id} bookmark={currBookmark} handleDelete={handleDelete} bookmarks={bookmarks} setBookmarks={setBookmarks} />
+              </>
+            );
+          })}
+        </div>
       </section>
-      </BookmarkContext.Provider>
+    </BookmarkContext.Provider>
   );
 }
 

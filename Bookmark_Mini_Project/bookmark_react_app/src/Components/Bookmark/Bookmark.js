@@ -1,23 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
-import { BookmarkContext } from "../../Context";
+import UpdateForm from "../UpdateForm/UpdateForm";
 
-// Refactor into <Form> Component
-const UpdateForm = ({bookmarkid}) => {
-    return (
-        <>
-        <form>
-            <input></input>
-        </form>
-        </>
-    )
-}
-// Refactor into <Bookmark> Component
-const Bookmark = ({ bookmark, handleDelete }) => {
+const Bookmark = ({ bookmark, handleDelete, bookmarks, setBookmarks }) => {
     const [showUpdateForm, toggleUpdateForm] = useState(false);
     const handleShowUpdateForm = () => {
         toggleUpdateForm(!showUpdateForm);
     };
-    const { bookmarks } = useContext(BookmarkContext);
     return (
         <div className="">
             <a href={bookmark.url} target="_blank"><span className="bookmarkTitle" key={bookmark._id}>{bookmark.title}</span></a>
@@ -29,13 +17,13 @@ const Bookmark = ({ bookmark, handleDelete }) => {
                 {"✖️"}
             </button>
             <button
-                onClick={ () => {
+                onClick={() => {
                     handleShowUpdateForm();
                 }}
             >
                 {"↩️"}
             </button>
-            <p>{!!showUpdateForm && <UpdateForm bookmarkid={bookmark._id}/>}</p>
+            <p>{!!showUpdateForm && <UpdateForm bookmarkid={bookmark._id} bookmarks={bookmarks} setBookmarks={setBookmarks} />}</p>
         </div>
     )
 }
