@@ -25,7 +25,7 @@ nav h1 {
   
 }
 
-nav h1:hover {
+nav h1:hover, h2:hover {
   text-decoration: underline;
 }
 
@@ -39,7 +39,7 @@ section {
 /* Bookmark List */
 h2 {
   color: rgb(241, 129, 0);
-  margin: 3rem 0 0;
+  margin: 1rem 0 1rem 0;
   text-align: center;
 }
 .bookmarks {
@@ -73,10 +73,6 @@ h2 {
   text-decoration: underline;
   font-size: 18pt;
 }
-
-/* .bookmark p {
-  color: rgb(87, 87, 87);
-} */
 
 .flex-container {
   display: flex;

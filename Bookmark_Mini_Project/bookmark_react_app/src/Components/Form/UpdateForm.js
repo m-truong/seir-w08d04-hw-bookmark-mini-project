@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-const UpdateForm = ({ bookmarkid, bookmarks, setBookmarks }) => {
+const UpdateForm = ({ bookmarkid, bookmarks, setBookmarks, token }) => {
     const updateTitle = useRef(null);
     const updateURL = useRef(null);
     // Update Bookmark Handler 
@@ -17,7 +17,8 @@ const UpdateForm = ({ bookmarkid, bookmarks, setBookmarks }) => {
             const response = await fetch(`http://localhost:3000/bookmarks/${bookmarkid}`, {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": token
                 },
                 body
             });

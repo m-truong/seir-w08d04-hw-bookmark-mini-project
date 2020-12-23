@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-const CreateForm = ({ bookmarks, setBookmarks }) => {
+const CreateForm = ({ bookmarks, setBookmarks, token }) => {
     const websiteTitle = useRef(null);
     const websiteURL = useRef(null);
     // Create Bookmark Handler 
@@ -17,7 +17,8 @@ const CreateForm = ({ bookmarks, setBookmarks }) => {
             const response = await fetch(`http://localhost:3000/bookmarks/`, {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    "Authorization": token
                 },
                 body
             });
@@ -34,7 +35,7 @@ const CreateForm = ({ bookmarks, setBookmarks }) => {
                 <input id="newTitle"
                     type="text"
                     ref={websiteTitle}
-                    placeholder="Add website title" />
+                    placeholder="Add website title" /> 
                 <label htmlFor="newURL">URL:</label>
                 <input id="newURL"
                     type="text"

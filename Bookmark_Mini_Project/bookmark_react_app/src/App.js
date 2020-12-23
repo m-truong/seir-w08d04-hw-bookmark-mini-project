@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from "react";
 import Bookmark from "./Components/Bookmark/Bookmark";
 import CreateForm from "./Components/Form/CreateForm";
+import RegisterForm from "./Components/Form/RegisterForm";
+import LoginForm from "./Components/Form/LoginForm";
 import './App.css';
+
+/**
+ * Note: I tried the "Hungry-For-More" and attempted to implement JWT Authentication, but I couldn't get a 
+ * username to create a new 
+ * bookmark entry inside the bookmark list once logged in. My bookmarks app was working correctly before I 
+ * tried implementing JWT 
+ * authentication, but it was good practice trying to get it to work.
+ */
 
 function App() {
   const [bookmarks, setBookmarks] = useState([]);
-
+  const [token, setToken] = useState("");
   // Read/Get-All/Index Handler
   const fetchBookmarks = async () => {
     try {
@@ -23,7 +33,8 @@ function App() {
       const response = await fetch(`http://localhost:3000/bookmarks/${id}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": token
         }
       });
       const deletedBookmark = await response.json();
@@ -37,6 +48,9 @@ function App() {
 
   useEffect(() => {
     fetchBookmarks();
+    if (window.localStorage.getItem('token')) { 
+      setToken(window.localStorage.getItem('token'))
+    }
   }, []);
 
   return (
@@ -45,6 +59,10 @@ function App() {
         <h1>Bookmarks</h1>
       </nav>
       <section className="">
+        <RegisterForm token={token}/>
+        <LoginForm token={token} setToken={setToken}/>
+        
+        {/* <hr/> */}
         <h3>Add a bookmark!</h3>
         <CreateForm bookmarks={bookmarks} setBookmarks={setBookmarks}/> 
       </section>
