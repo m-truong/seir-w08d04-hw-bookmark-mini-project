@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3000;
 
 // ===============
 // JSON MIDDLEWARE 
-// ** this needs to be as high as possible before the router ** 
+// ** needs to be before router ** 
 // ===============
 app.use(cors())
 app.use(express.json()); 

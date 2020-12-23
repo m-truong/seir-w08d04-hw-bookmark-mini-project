@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import UpdateForm from "../UpdateForm/UpdateForm";
+import React, { useState } from "react";
+import UpdateForm from "../Form/UpdateForm";
 
 const Bookmark = ({ bookmark, handleDelete, bookmarks, setBookmarks }) => {
     const [showUpdateForm, toggleUpdateForm] = useState(false);
@@ -17,7 +17,7 @@ const Bookmark = ({ bookmark, handleDelete, bookmarks, setBookmarks }) => {
                 {"✖️"}
             </button>
             <button
-                onClick={() => {
+                onClick={(evt) => {
                     handleShowUpdateForm();
                 }}
             >

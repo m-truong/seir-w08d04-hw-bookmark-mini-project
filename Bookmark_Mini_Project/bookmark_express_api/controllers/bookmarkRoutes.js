@@ -28,9 +28,6 @@ bookmarkRoutes.get('/', async (req, res) => {
 // ===============
 bookmarkRoutes.delete('/:id', async (req, res) => {
     try {
-        // if (true) {
-        //     throw new Error("You shall not pass")
-        // }
         const deletedBookmark = await bookmarkModel.findByIdAndRemove(req.params.id);
         res.status(200).json(deletedBookmark);
     } catch (error) {
@@ -46,10 +43,7 @@ bookmarkRoutes.delete('/:id', async (req, res) => {
 bookmarkRoutes.put('/:id', async (req, res) => {
     try {
         const updatedBookmark = await bookmarkModel.findByIdAndUpdate(
-            // takes the id from the URL 
             req.params.id,
-            // uses the .body of PostMan
-            // seems like it destructures entire original object and makes a copy of it
             req.body,
             // need this flag to replace the current object 
             { new: true }
@@ -67,18 +61,11 @@ bookmarkRoutes.put('/:id', async (req, res) => {
 // ===============
 
 bookmarkRoutes.post('/', async (req, res) => {
-    //the code in the try block will run if it error the catch block runs
     try {
-        //using await the createdBookmark will be assigned when the promise resolves
         const createdBookmark = await bookmarkModel.create(req.body);
-        //status sets the status code then sends a json response
         res.status(200).json(createdBookmark);
-        // implicitly has a 'throw' keyword with (new) Error-object
     } catch (error) {
-        // sets the status code and returns the error as json
-        // type any status ### but needs to be ~400
         res.status(400).json(error);
-        // 'always' executes
     } finally {
         console.log('check Postman to verify if new document-object was successfully created...');
     }
